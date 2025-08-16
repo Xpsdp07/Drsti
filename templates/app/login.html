@@ -1,0 +1,82 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Login</title>
+    <!-- Tabler CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/css/tabler.min.css" rel="stylesheet"/>
+    <style>
+      body {
+        background-image: url("{% static 'tabler/img/illustrations/login.svg' %}");
+        background-position: left;
+        background-repeat: no-repeat;
+      }
+      .page-center {
+        display: flex;
+        justify-content: center; /* push card to the right */
+        align-items: end;       /* center vertically */
+        height: 100vh;             /* full viewport height */
+        padding-right: 5%;
+      }
+
+      .login-card {
+        min-width: 380px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page page-center">
+      <div class="card card-md login-card shadow-lg">
+        <div class="card-body">
+          <h2 class="h2 text-center mb-4">Login to your account</h2>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label">Email address</label>
+              <input type="email" name="username" class="form-control" placeholder="Enter email" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Password</label>
+              <div class="input-group input-group-flat">
+                <input type="password" name="password" class="form-control" placeholder="Password" id="password" required>
+                <span class="input-group-text">
+                  <a href="#" class="link-secondary" id="togglePassword" title="Show/Hide Password">
+                    <!-- Eye icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" id="eyeIcon" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <circle cx="12" cy="12" r="2" />
+                      <path d="M22 12c-2.667 4 -6 6 -10 6s-7.333 -2 -10 -6c2.667 -4 6 -6 10 -6s7.333 2 10 6" />
+                    </svg>
+                  </a>
+                </span>
+              </div>
+            </div>
+            <div class="form-footer">
+              <button type="submit" class="btn btn-primary w-100">Sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabler JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta19/dist/js/tabler.min.js"></script>
+    <script>
+      document.getElementById('togglePassword').addEventListener('click', function(e) {
+        e.preventDefault();
+        const pwd = document.getElementById('password');
+        const eye = document.getElementById('eyeIcon');
+        if (pwd.type === 'password') {
+          pwd.type = 'text';
+          eye.innerHTML = '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 3l18 18" /><path d="M10.584 10.587a2 2 0 0 0 2.828 2.827" /><path d="M9.366 5.353c.816 -.227 1.675 -.353 2.634 -.353c4 0 7.333 2 10 6c-.715 1.072 -1.469 2.003 -2.263 2.794" />';
+        } else {
+          pwd.type = 'password';
+          eye.innerHTML = '<path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2" /><path d="M22 12c-2.667 4 -6 6 -10 6s-7.333 -2 -10 -6c2.667 -4 6 -6 10 -6s7.333 2 10 6" />';
+        }
+      });
+    </script>
+  </body>
+</html>
