@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+*.log
+
+# Virtual env
+venv/
+.env
+.venv/
+
+# Django
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+# If you generate collected static to /static/
+static/
+
+# IDE
+.vscode/
+.idea/
+
+# Node (if ever used)
+node_modules/
+dist/
